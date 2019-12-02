@@ -13,7 +13,7 @@ def connection_pool01():
 def explicitly_connection_pool():
     print("=={}()==".format(inspect.stack()[0][3]))
     connectionPool = ExplicitlyConnectionPool.get_instance()
-    connection = connection_pool01().get_connection()
+    connection = connectionPool.get_connection()
     print(type(connection), connection)
     connection.close()
 
