@@ -20,6 +20,8 @@ def connect02():
 
 
 if __name__ == "__main__":
-    # connect01()
     # read_config()
+    connect01()
+    connect01()
+    connect02()
     connect02()
