@@ -1,8 +1,7 @@
 import mysql
 from mysql.connector.pooling import MySQLConnectionPool
 
-
-class ExplicitlyConnectionPool(object):
+class ConnectionPool(object):
     INSTANCE = None
 
     def __init__(self):
@@ -14,7 +13,7 @@ class ExplicitlyConnectionPool(object):
     @classmethod
     def get_instance(cls, *args, **kargs):
         if cls.INSTANCE is None:
-            cls.INSTANCE = ExplicitlyConnectionPool()
+            cls.INSTANCE = ConnectionPool()
             # cls.INSTANCE = cls(*args, **kargs)
         return cls.INSTANCE
 
@@ -24,7 +23,3 @@ class ExplicitlyConnectionPool(object):
     @classmethod
     def pool_close(cls):
         cls.INSTANCE = None
-
-
-def get_implicitly_connection(_pool_size):
-    return mysql.connector.connect(pool_name="myPool", pool_size=_pool_size, option_files='db_config.conf')

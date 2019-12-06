@@ -1,0 +1,14 @@
+# 원하는 경로에 backup 위한 권한 변경
+1. /etc/apparmor.d/usr.sbin.mysqld 편집기로 열기
+2. '# Allow data files dir access' 아래에 다음 두 줄 추가
+    '해당경로'/ r,
+    '해당경로'/** rw,
+3. sudo /etc/init.d/apparmor restart
+4. sudo service mysql restart
+
+# 원하는 경로에 backup 위한 default 경로 변경
+1. SHOW variables LIKE "%secure_file_priv%"; - 값(경로) 확인(default로 ''/var/lib/mysql-files/' 저장돼 있음)
+2. /etc/mysql/mysql.conf.d/mysqld.cnf 편집기로 열기
+3. '[mysqld]' 아래에 다음 한 줄 추가
+    secure_file_priv=""
+
