@@ -30,7 +30,7 @@ class DbInit:
         try:
             conn = ExplicitlyConnectionPool.get_instance().get_connection()
             cursor = conn.cursor()
-            cursor.execute("USE {}".format(self._db['database_name']))
+            # cursor.execute("USE {}".format(self._db['database_name']))
             for table_name, table_sql in self._db['sql'].items():
                 try:
                     print("Creating table {}".format(table_name), end=' ')
@@ -65,7 +65,7 @@ class DbInit:
         try:
             conn = ExplicitlyConnectionPool.get_instance().get_connection()
             cursor = conn.cursor()
-            cursor.execute("USE {}".format(self._db['database_name']))
+            # cursor.execute("USE {}".format(self._db['database_name']))
             for trigger_name, trigger_sql in self._db['trigger'].items():
                 try:
                     print("Creating trigger {}".format(trigger_name), end=' ')
@@ -87,7 +87,7 @@ class DbInit:
         try:
             conn = ExplicitlyConnectionPool.get_instance().get_connection()
             cursor = conn.cursor()
-            cursor.execute("USE {}".format(self._db['database_name']))
+            # cursor.execute("USE {}".format(self._db['database_name']))
             for procedure_name, procedure_sql in self._db['procedure'].items():
                 try:
                     print("Creating procedure {}".format(procedure_name), end=' ')
