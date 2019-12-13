@@ -2,7 +2,7 @@
 1. /etc/apparmor.d/usr.sbin.mysqld 편집기로 열기
 2. '# Allow data files dir access' 아래에 다음 두 줄 추가
     '해당경로'/ r,
-    '해당경로'/** rw,
+    '해당경로'/** rwk,
 3. sudo /etc/init.d/apparmor restart
 4. sudo service mysql restart
 
