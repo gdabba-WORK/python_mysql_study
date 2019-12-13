@@ -1,3 +1,4 @@
+from dml.coffe_update import update_product
 from dml.coffee_insert import insert_product, insert_products
 from dml.coffee_select import query_with_fetchone
 from dml.coffee_select import query_with_fetchall
@@ -72,6 +73,13 @@ def insert_products_method():
     query_with_fetchall_method()
 
 
+def update_product_method():
+    global update_sql
+    update_product(update_sql, '라떼수정', 'C001')
+    query_with_fetchone_method()
+
+
+
 if __name__ == "__main__":
     # connection_pool_method()
     select_sql = ""
@@ -102,6 +110,10 @@ if __name__ == "__main__":
 
     # call_sale_stat_sp('proc_sale_stat')
 
-    call_order_price_by_issale('proc_saledetail_orderby', True)
-    call_order_price_by_issale('proc_saledetail_orderby', False)
+    # call_order_price_by_issale('proc_saledetail_orderby', True)
+    # call_order_price_by_issale('proc_saledetail_orderby', False)
     # print()
+
+    update_sql = "update product set name = %s where code = %s"
+
+    update_product_method()

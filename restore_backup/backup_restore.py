@@ -7,7 +7,7 @@ class BackupRestore:
     def __init__(self):
         self._db = read_ddl_file()
 
-    def __create_database(self):
+    def data_backup(self):
         try:
             sql = read_ddl_file()
             conn = ExplicitlyConnectionPool.get_instance().get_connection()
@@ -25,44 +25,4 @@ class BackupRestore:
         finally:
             cursor.close()
             conn.close()
-
-    def __create_table(self):
-        try:
-            conn = ExplicitlyConnectionPool.get_instance().get_connection()
-            cursor = conn.cursor()
-            cursor.execute("USE {}".format(self._db['database_name']))
-            for table_name, table_sql in self._db['sql'].items():
-                try:
-                    print("Creating table {}".format(table_name), end='')
-                    cursor.execute(table_sql)
-                except Error as err:
-                    if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
-                        print("already exists.")
-                    else:
-                        print(err.msg)
-                else:
-                    print("OK")
-        except Error as err:
-            print(err)
-        finally:
-            cursor.close()
-            conn.close()
-
-    def __create_user(self):
-        try:
-            conn = ExplicitlyConnectionPool.get_instance().get_connection()
-            cursor = conn.cursor()
-            print("Creating user: ", end='')
-            cursor.execute(self._db['user_sql'])
-            print("OK")
-        except Error as err:
-            print(err)
-        finally:
-            cursor.close()
-            conn.close()
-
-    def service(self):
-        self.__create_database()
-        self.__create_table()
-        self.__create_user()
 
